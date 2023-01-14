@@ -58,13 +58,20 @@ class StudentController extends Controller
     public function show($id)
     {
         //
-        $student = Students::find($id);
-
-        return response()->json([
-            'status' => true,
-            'message' => 'Student found successfully',
-            'data' => $student
-        ], 201);
+       $student = Students::find($id);
+       if($student){
+            return response()->json([
+                'status' => true,
+                'message' => 'Student found successfully',
+                'data' => $student
+            ], 201);
+        }else{
+            return response()->json([
+                'status' => false,
+                'message' => 'Student not found',
+                'data' => null
+            ],404);
+        }
     }
 
     /**
@@ -113,10 +120,11 @@ class StudentController extends Controller
     public function destroy($id)
     {
         //
+
         $student = Students::find($id);
 
         if($student){
-            $student->delete($data);
+            $student->delete();
             return response()->json([
                 'status' => true,
                 'message' => 'Student deleted successfully',
