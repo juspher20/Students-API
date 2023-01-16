@@ -120,7 +120,6 @@ class StudentController extends Controller
     public function destroy($id)
     {
         //
-
         $student = Students::find($id);
 
         if($student){
